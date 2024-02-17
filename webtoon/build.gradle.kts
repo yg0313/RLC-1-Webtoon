@@ -27,6 +27,10 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
 	runtimeOnly("com.h2database:h2:2.2.222")
+
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+	implementation("org.springframework.boot:spring-boot-starter-security")
+
 }
 
 tasks.withType<KotlinCompile> {
