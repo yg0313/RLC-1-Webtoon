@@ -1,4 +1,4 @@
-package com.rlc.webtoon.entity
+package com.rlc.webtoon.entity.common
 
 import jakarta.persistence.Column
 import jakarta.persistence.EntityListeners
