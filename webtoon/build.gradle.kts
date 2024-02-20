@@ -31,6 +31,11 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
 	implementation("org.springframework.boot:spring-boot-starter-security")
 
+	//jwt
+	implementation("io.jsonwebtoken:jjwt-api:0.12.5")
+	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.5")
+	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-gson
+	implementation("io.jsonwebtoken:jjwt-gson:0.12.5")
 }
 
 tasks.withType<KotlinCompile> {

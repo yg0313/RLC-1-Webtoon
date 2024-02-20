@@ -1,6 +1,7 @@
 package com.rlc.webtoon.entity
 
 import com.rlc.webtoon.dto.request.UserRequestDto
+import com.rlc.webtoon.entity.common.BaseTimeEntity
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
@@ -12,7 +13,7 @@ import java.util.UUID
 @Table(name = "tb_user")
 class User constructor(
     @Column(nullable = false)
-    val id: String,
+    val loginId: String,
     @Column(nullable = false)
     var password: String,
     @Column(nullable = false)
@@ -23,13 +24,15 @@ class User constructor(
     val birth: String,
 
     @Id
-    private var uuid: String? = null
+    var uuid: String? = null,
+
+    var refreshToken: String? = null
 ): BaseTimeEntity() {
 
     companion object {
         fun of(userRequestDto: UserRequestDto): User {
             return User(
-                id = userRequestDto.id,
+                loginId = userRequestDto.id,
                 password = userRequestDto.password,
                 email = userRequestDto.email,
                 phoneNumber = userRequestDto.phoneNumber,
@@ -38,4 +41,9 @@ class User constructor(
             )
         }
     }
+
+    override fun toString(): String {
+        return "User(loginId='$loginId', email='$email', phoneNumber='$phoneNumber', birth='$birth', uuid=$uuid, refreshToken=$refreshToken)"
+    }
+
 }
