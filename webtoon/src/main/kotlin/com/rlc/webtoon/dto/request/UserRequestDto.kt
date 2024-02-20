@@ -25,8 +25,4 @@ data class UserRequestDto constructor(
             )
         }
     }
-
-    override fun toString(): String {
-        return "UserRequestDto(id='$id', email='$email', phoneNumber='$phoneNumber', birth='$birth')"
-    }
 }
