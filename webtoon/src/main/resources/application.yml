@@ -18,3 +18,5 @@ spring:
 
 jwt:
   secretKey: "rlc_596D9E46BAF2AE5B9BA893DE7282E"
+  validTokenDay: 30
+  validTokenTime: 60

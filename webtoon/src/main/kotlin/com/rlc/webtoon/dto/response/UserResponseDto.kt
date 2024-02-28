@@ -15,7 +15,7 @@ data class UserResponseDto constructor(
     companion object {
         fun of(user: User): UserResponseDto {
             return UserResponseDto(
-                uuid = user.uuid!!,
+                uuid = user.uuid,
                 id = user.loginId,
                 email = user.email,
                 phoneNumber = user.phoneNumber,

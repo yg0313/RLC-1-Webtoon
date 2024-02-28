@@ -1,5 +1,7 @@
 package com.rlc.webtoon.dto.request
 
+import com.rlc.webtoon.entity.User
+
 //TODO 유효성 검증
 data class UserRequestDto constructor(
     val id: String,
@@ -8,6 +10,16 @@ data class UserRequestDto constructor(
     val phoneNumber: String,
     val birth: String,
 ){
+
+    fun toEntity(): User {
+        return User(
+            loginId = id,
+            password = password,
+            email = email,
+            phoneNumber = phoneNumber,
+            birth = birth
+        )
+    }
 
     companion object {
         fun fixture(

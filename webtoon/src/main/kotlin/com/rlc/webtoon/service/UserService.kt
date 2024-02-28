@@ -25,7 +25,7 @@ class UserService(
     fun signupUser(userRequestDto: UserRequestDto): UserResponseDto {
         isDuplicatedLoginId(userRequestDto.id)
 
-        val user = User.of(userRequestDto).apply {
+        val user = userRequestDto.toEntity().apply {
             this.password = BCryptPasswordEncoder().encode(this.password)
         }
 
@@ -39,7 +39,7 @@ class UserService(
      * @exception RlcClientException 동일한 아이디가 있으면 발생.
      */
     private fun isDuplicatedLoginId(loginId: String) {
-        if (userRepository.findByLoginId(loginId) != null) {
+        if (userRepository.existsByLoginId(loginId)) {
             throw RlcClientException("이미 등록된 사용자 아이디가 있습니다. id:${loginId}")
         }
     }
