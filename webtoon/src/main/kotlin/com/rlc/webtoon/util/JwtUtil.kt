@@ -21,41 +21,53 @@ class JwtUtil {
     @Value("\${jwt.secretKey}")
     private lateinit var secretKey: String
 
+    @Value("\${jwt.validTokenDay}")
+    private val validDay: Long = 0
+
+    @Value("\${jwt.validTokenTime}")
+    private val validTime: Long = 0
+
     /**
      * Jwt 생성.
      * accessToken 만료기간: 60분.
      * refreshToken 만료기간: 30일.
      */
     fun createJwt(uuid: String): Map<String, String> {
-        //30일
-        val refreshTokenExpiryTime = Date.from(
-            Instant.now()
-                .plus(30, ChronoUnit.DAYS)
+        val accessToken = createAccessToken(uuid)
+        val refreshToken = createRefreshToken(uuid)
+
+        return mapOf(
+            com.rlc.webtoon.util.accessToken to accessToken,
+            com.rlc.webtoon.util.refreshToken to refreshToken
         )
-        //60분
+    }
+
+    private fun createAccessToken(uuid: String): String {
         val accessTokenExpiryTime = Date.from(
             Instant.now()
-                .plus(60, ChronoUnit.MINUTES)
+                .plus(validTime, ChronoUnit.MINUTES)
         )
 
-        val refreshToken = Jwts.builder()
-            .signWith(createSignKey())
-            .subject(uuid)
-            .issuedAt(Date())
-            .expiration(refreshTokenExpiryTime)
-            .compact()
-
-        val accessToken = Jwts.builder()
+        return Jwts.builder()
             .signWith(createSignKey())
             .subject(uuid)
             .issuedAt(Date())
             .expiration(accessTokenExpiryTime)
             .compact()
+    }
 
-        return mapOf(
-            "accessToken" to accessToken,
-            "refreshToken" to refreshToken
+    private fun createRefreshToken(uuid: String): String {
+        val refreshTokenExpiryTime = Date.from(
+            Instant.now()
+                .plus(validDay, ChronoUnit.DAYS)
         )
+
+        return Jwts.builder()
+            .signWith(createSignKey())
+            .subject(uuid)
+            .issuedAt(Date())
+            .expiration(refreshTokenExpiryTime)
+            .compact()
     }
 
     /**

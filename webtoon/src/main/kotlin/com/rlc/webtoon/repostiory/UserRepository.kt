@@ -7,5 +7,7 @@ interface UserRepository: JpaRepository<User, String> {
 
     fun findByLoginId(id: String): User?
 
+    fun existsByLoginId(id: String): Boolean
+
     fun findByUuidAndRefreshToken(uuid: String, refreshToken: String): User?
 }

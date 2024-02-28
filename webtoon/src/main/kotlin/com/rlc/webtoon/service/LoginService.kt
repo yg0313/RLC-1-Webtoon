@@ -5,6 +5,7 @@ import com.rlc.webtoon.entity.User
 import com.rlc.webtoon.exception.RlcClientException
 import com.rlc.webtoon.repostiory.UserRepository
 import com.rlc.webtoon.util.JwtUtil
+import com.rlc.webtoon.util.accessToken
 import org.slf4j.LoggerFactory
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
@@ -35,7 +36,7 @@ class LoginService(
 
         log.info("login(), user:$user")
 
-        return JwtDto.of(id, jwt["accessToken"]!!, jwt["refreshToken"]!!)
+        return JwtDto.of(id, jwt[accessToken]!!, jwt[com.rlc.webtoon.util.refreshToken]!!)
     }
 
     @Transactional
@@ -52,7 +53,7 @@ class LoginService(
 
         log.info("refreshToken(), user:$user")
 
-        return JwtDto.of(user.loginId, jwt["accessToken"]!!, jwt["refreshToken"]!!)
+        return JwtDto.of(user.loginId, jwt[accessToken]!!, jwt[com.rlc.webtoon.util.refreshToken]!!)
     }
 
     /**
@@ -60,7 +61,7 @@ class LoginService(
      */
     private fun User.createJwt(): Map<String, String> {
         val jwt = jwtUtil.createJwt(this.uuid!!)
-        this.refreshToken = jwt["refreshToken"] // refreshToken 새로 저장.
+        this.refreshToken = jwt[com.rlc.webtoon.util.refreshToken] // refreshToken 새로 저장.
 
         return jwt
     }
