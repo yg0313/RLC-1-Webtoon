@@ -7,10 +7,10 @@ data class PortoneResponse(
 ){
 
     companion object {
-        fun successResponseFixture(): PortoneResponse {
+        fun successResponseFixture(message: String? = null): PortoneResponse {
             return PortoneResponse(
                 code = 0,
-                message = null,
+                message = message,
                 response = emptyMap()
             )
         }

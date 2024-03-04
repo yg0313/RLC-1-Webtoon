@@ -22,4 +22,6 @@ interface PortoneInterface {
         cardPassword: String,
         productName: String,
     ): PortoneResponse
+
+    fun cancel(impUid: String, merchantUid: String, price: Int): PortoneResponse
 }

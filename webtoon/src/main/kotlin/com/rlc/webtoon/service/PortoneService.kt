@@ -40,7 +40,19 @@ class PortoneService(
     ): PortoneResponse {
         val portoneResponse: PortoneResponse = portoneFeignClient.payment(accessToken, merchantUid, price, cardNumber, expiry, birth, cardPassword, productName)
 
-        logger.info("getAccessToken(), portoneResponse:$portoneResponse")
+        logger.info("payment(), portoneResponse:$portoneResponse")
+
+        if(portoneResponse.code != 0) {
+            throw RlcServerException(errorMessage = portoneResponse.message.toString(), errorCode = portoneResponse.code.toString())
+        }
+
+        return portoneResponse
+    }
+
+    override fun cancel(impUid: String, merchantUid: String, price: Int): PortoneResponse {
+        val portoneResponse: PortoneResponse = portoneFeignClient.cancel(impUid, merchantUid, price)
+
+        logger.info("cancel(), portoneResponse:$portoneResponse")
 
         if(portoneResponse.code != 0) {
             throw RlcServerException(errorMessage = portoneResponse.message.toString(), errorCode = portoneResponse.code.toString())

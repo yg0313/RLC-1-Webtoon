@@ -28,4 +28,11 @@ interface PortoneFeignClient {
         @RequestPart("name")productName: String,
     ): PortoneResponse
 
+    @PostMapping("/payments/cancel")
+    fun cancel(
+        @RequestPart("imp_uid")impUid: String,
+        @RequestPart("merchant_uid")merchantUid: String,
+        @RequestPart("amount")price: Int,
+    ): PortoneResponse
+
 }
