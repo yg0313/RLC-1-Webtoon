@@ -28,6 +28,7 @@ class PortoneServiceTest @Autowired constructor(
         )
 
         assertThat(portoneResponse.code).isEqualTo(0)
+        assertThat(portoneResponse.message).isEqualTo("토큰발급 완료")
     }
 
     @Test
@@ -47,5 +48,19 @@ class PortoneServiceTest @Autowired constructor(
         )
 
         assertThat(portoneResponse.code).isEqualTo(0)
+        assertThat(portoneResponse.message).isEqualTo("결제 완료")
+    }
+
+    @Test
+    @DisplayName("아임포트 결제 취소요청이 정상 처리된다.")
+    fun cancel() {
+        val portoneResponse: PortoneResponse = portoneInterface.cancel(
+            impUid = "testUid",
+            merchantUid = UUID.randomUUID().toString(),
+            price = 10
+        )
+
+        assertThat(portoneResponse.code).isEqualTo(0)
+        assertThat(portoneResponse.message).isEqualTo("취소처리 완료")
     }
 }

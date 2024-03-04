@@ -40,7 +40,7 @@ class PortoneService(
     ): PortoneResponse {
         val portoneResponse: PortoneResponse = portoneFeignClient.payment(accessToken, merchantUid, price, cardNumber, expiry, birth, cardPassword, productName)
 
-        logger.info("getAccessToken(), portoneResponse:$portoneResponse")
+        logger.info("payment(), portoneResponse:$portoneResponse")
 
         if(portoneResponse.code != 0) {
             throw RlcServerException(errorMessage = portoneResponse.message.toString(), errorCode = portoneResponse.code.toString())

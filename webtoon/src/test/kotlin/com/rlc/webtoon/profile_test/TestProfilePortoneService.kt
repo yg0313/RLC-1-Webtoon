@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 class TestProfilePortoneService: PortoneInterface {
 
     override fun getAccessToken(impKey: String, impSecret: String): PortoneResponse {
-        return PortoneResponse.successResponseFixture()
+        return PortoneResponse.successResponseFixture("토큰발급 완료")
     }
 
     override fun payment(
@@ -23,6 +23,10 @@ class TestProfilePortoneService: PortoneInterface {
         cardPassword: String,
         productName: String
     ): PortoneResponse {
-        return PortoneResponse.successResponseFixture()
+        return PortoneResponse.successResponseFixture("결제 완료")
+    }
+
+    override fun cancel(impUid: String, merchantUid: String, price: Int): PortoneResponse {
+        return PortoneResponse.successResponseFixture("취소처리 완료")
     }
 }
