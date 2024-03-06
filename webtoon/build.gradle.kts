@@ -19,6 +19,13 @@ repositories {
 	mavenCentral()
 }
 
+dependencyManagement {
+
+	imports {
+		mavenBom ("org.springframework.cloud:spring-cloud-dependencies:2023.0.0")
+	}
+}
+
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
@@ -36,6 +43,9 @@ dependencies {
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.5")
 	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-gson
 	implementation("io.jsonwebtoken:jjwt-gson:0.12.5")
+
+	//feign
+	implementation ("org.springframework.cloud:spring-cloud-starter-openfeign")
 }
 
 tasks.withType<KotlinCompile> {

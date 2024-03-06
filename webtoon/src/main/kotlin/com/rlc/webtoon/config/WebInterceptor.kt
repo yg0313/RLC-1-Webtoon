@@ -38,6 +38,20 @@ class WebInterceptor(
                 }
                 return false
             }
+        }else{
+            response.apply {
+                contentType = MediaType.APPLICATION_JSON.toString()
+                characterEncoding = Charsets.UTF_8.toString()
+                writer.write(
+                    ResponseResult(
+                        code = "403",
+                        result = "로그인 이후 이용해 주세요."
+                    ).toString()
+                )
+
+                status = HttpStatus.FORBIDDEN.value()
+            }
+            return false
         }
 
 

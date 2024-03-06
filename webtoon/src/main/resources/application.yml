@@ -20,3 +20,14 @@ jwt:
   secretKey: "rlc_596D9E46BAF2AE5B9BA893DE7282E"
   validTokenDay: 30
   validTokenTime: 60
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 3000
+        readTimeout: 3000
+
+import:
+  key: "key"
+  secret: "secret"
