@@ -1,12 +1,13 @@
 package com.rlc.webtoon.entity
 
+import com.rlc.webtoon.dto.response.WebtoonResponseDto
 import com.rlc.webtoon.entity.common.BaseTimeEntity
 import jakarta.persistence.*
 import java.time.DayOfWeek
 
 @Entity
 @Table(name = "tb_webtoon")
-class Webtoon(
+open class Webtoon(
     val title: String,
     val author: String,
     @Enumerated(EnumType.STRING)
