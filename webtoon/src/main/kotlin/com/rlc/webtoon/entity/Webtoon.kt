@@ -1,6 +1,5 @@
 package com.rlc.webtoon.entity
 
-import com.rlc.webtoon.dto.response.WebtoonResponseDto
 import com.rlc.webtoon.entity.common.BaseTimeEntity
 import jakarta.persistence.*
 import java.time.DayOfWeek
