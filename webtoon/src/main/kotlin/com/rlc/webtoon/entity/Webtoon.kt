@@ -7,7 +7,7 @@ import java.time.DayOfWeek
 
 @Entity
 @Table(name = "tb_webtoon")
-open class Webtoon(
+class Webtoon(
     val title: String,
     val author: String,
     @Enumerated(EnumType.STRING)
